@@ -1,0 +1,37 @@
+YT -> Inter VLAN Routing == prac-4
+•	Create the above topology using GNS software
+•	Configure the nodes using suitable ip addresses 
+•	Using suitable commands configure the inter VLAN routing and verify the same
+
+====
+
+drag drop topology , pc0, pc1, switch (3560 24PS) 
+	connect with fast ethernet 
+	from pc0 FE0 -> to switch FE0/1
+	from pc1 FE0 -> to switch FE0/2
+configure ip address
+	click pc0 -> Desktop -> IP configurtion -> IP4 addr -> 192.168.1.2 
+			& Default gateway -> 192.168.1.1
+	click pc1 -> Desktop -> IP configurtion -> IP4 addr -> 192.168.2.2 
+			& Default gateway -> 192.168.2.1
+			
+configure multilayer switch
+	click switch -> CLI
+		hit enter  at end and type "no" & enter 
+		enable -> configure terminal -> vlan 10 -> name xyzVLAN -> exit ->
+		vlan 20 ->  name abcVLAN -> exit ->
+		interface fastEthernet 0/1 -> switchport mode access -> switchport access vlan 10 ->exit ->
+		interface fastEthernet 0/2 -> switchport mode access -> switchport access vlan 20 ->exit ->
+		interface VLAN 10 -> ip address 192.168.1.1 255.255.255.0 -> no shutdown -> exit ->
+		interface VLAN 20 -> ip address 192.168.2.1 255.255.255.0 -> no shutdown -> exit ->
+		show ip interface brief -> configure terminal -> ip routing -> exit
+	
+Check connectivity	
+	pc0 -> desktop -> cmd
+		ping 192.168.2.2
+
+same from pc1 ping pc0 192.168.1.2
+	
+	
+	
+

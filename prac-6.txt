@@ -1,0 +1,55 @@
+YT -> Using AS Path Attribute == prac-6
+---
+
+Draw router topology  - 3 routers
+rightclick on each router -> change hostname (gv any name to each)
+rightclick on each router -> configure -> slots -> slot0 -> NM-4T
+select cable draw from R0 serial 0/0 -> R1 R0 serial 0/0
+select cable draw from R1 serial 0/1 -> R2 R0 serial 0/1
+hit play/start -> confirm start all
+
+Configure R0 -> right click -> console -> 
+	configure terminal -> interface loopback 0 -> 
+	ip address 10.1.1.1 255.255.255.0 -> exit ->
+	interface serial 0/0 -> ip address 192.168.1.1 255.255.255.0 -> no shutdown -> exit
+
+Configure R1 -> right click -> console -> 
+	configure terminal -> interface loopback 0 -> 
+	ip address 10.2.2.1 255.255.255.0 -> exit ->
+	interface serial 0/0 -> ip address 192.168.1.2 255.255.255.0 -> no shutdown -> exit ->
+	interface serial 0/1 -> ip address 192.168.2.1 255.255.255.0 -> no shutdown -> exit
+	
+Configure R2 -> right click -> console -> 
+	configure terminal -> interface loopback 0 -> 
+	ip address 10.3.3.1 255.255.255.0 -> exit ->
+	interface serial 0/1 -> ip address 192.168.2.2 255.255.255.0 -> no shutdown -> exit
+	
+configure BGP protocol  R0 -> right click -> console -> 
+	router bgp 100 -> neighbor 192.168.1.2 remote-as 300 -> network 10.1.1.0 mask 255.255.255.0 -> exit
+
+configure BGP protocol  R1 -> right click -> console -> 
+	router bgp 300 -> neighbor 192.168.1.1 remote-as 100 -> neighbor 192.168.2.2 remote-as 65000 -> 
+	network 10.2.2.0 mask 255.255.255.0 -> exit
+		
+configure BGP protocol  R2 -> right click -> console -> 
+	router bgp 65000 -> neighbor 192.168.2.1 remote-as 300 -> network 10.3.3.0 mask 255.255.255.0 -> exit
+	
+verifying BGP
+R1 -> console 
+	exit -> exit -> show ip bgp neighbors
+	(keep on hitting enters , it will show BGP network printed in ouptut)
+	
+R0 -> Console 
+	exit -> exit -> show ip route ->
+	ping -> (Target IP - 10.3.3.1 , (hit enters) , xtende cmnds - y, source ip - 10.1.1.1) ->
+	show ip bgp -> (it shows 65000 i at the end)
+
+R1 -> console
+	configure terminal -> router bgp 300 -> neighbor 19.168.1.1 remove-private-as -> exit -> 
+	exit -> clea ip bgp *
+	
+R0 -> Console 
+	show ip bgp ( it will remove 65000 at the end, acheiving prac-6)
+	
+	
+

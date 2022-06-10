@@ -1,0 +1,31 @@
+YT -> Modern Networking 5 == prac-2
+•	Create the above topology using Cisco Packet Tracer
+•	Configure the hosts using suitable ip addresses 
+•	Using suitable commands show the control of the devices using mobile phone
+------
+Drag and drop components of network
+conect devices with fast ethernet (any fastEth from 0/24) except phone (lightning symbol for FE)
+connect smartphone with homegateway
+	copy SSID - click gateway - config -> wireless -> SSID
+	paste SSID - click phone - config -> wreless -> SSID
+assign IP address to each hosts
+	click server - desktop -> IP config -> Ip addr - 192.168.1.1
+	click phone - desktop -> IP config -> switch to static from dhcp -> Ip addr - 192.168.1.2
+	click light - config -> fastethernet0 -> Ip addr - 192.168.1.3 
+	click cam - config -> fastethernet0 -> Ip addr - 192.168.1.4
+	click door - config -> fastethernet0 -> Ip addr - 192.168.1.5
+enable registration server
+	click server -> service -> IOT -> enable rgstration server
+					Desktop -> web brwser -> http://192.168.1.1 -> signup
+connect IOT devices with server
+	Light -> config -> global -> bt server -> remote server -> server address -> 192.168.1.1 & creds
+	similar for cam  & home	
+control devices from smartphone
+	smartphone -> desktop ->  Iot monitor -> add server details & creds
+	and play with IoT devices
+can add condition in that tab	
+
+
+
+
+	

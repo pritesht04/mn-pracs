@@ -1,0 +1,33 @@
+YT -> Modern Networking 2 == prac-1
+•	Using mininet, create the default topology
+-----
+
+Installing Mininet in Ubuntu 14.04 (Virtual Machine)
+
+Software used
+Oracle VirtualBox
+Ubuntu 14.04
+
+The following commands have been used 
+sudo apt-get install mininet
+sudo mn -c
+sudo apt-get install git
+git clone git://github.com/mininet/mininet
+cd mininet
+git tag #list available version
+git checkout -b cs244-spring-2012-final
+cd ..
+cd mininet/util/install.sh -a
+
+------
+
+Prac 1- 
+sudo mn (create default topology netwrk , 1c 1s 2h)
+<enter pwd>
+nodes (show avlbl nodes)
+net (show avlbl network)
+dump (give all info)
+h1 ping h2 (h1 ping to h2)
+link s1 h1 down (break link from s to h1)
+h1 xterm (open h1 cmd prmpt)
+
